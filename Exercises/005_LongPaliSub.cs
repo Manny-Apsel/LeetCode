@@ -9,7 +9,7 @@ namespace LeetCode
                 return s;
             }
 
-            string res = "";
+            int start = 0, end = 0;
 
             for (int i = 0; i < s.Length - 1; i++)
             {
@@ -20,13 +20,10 @@ namespace LeetCode
                 {
                     if (s[i - j] == s[i + j])
                     {
-                        if ((2 * j) + 1 > res.Length)
+                        if ((2 * j) + 1 > end - start)
                         {
-                            res = "";
-                            for (int k = i - j; k < i + j + 1; k++)
-                            {
-                                res += s[k];
-                            }
+                            start = i - j;
+                            end = i + j + 1;
                         }
                         j++;
                     }
@@ -43,13 +40,10 @@ namespace LeetCode
                 {
                     if (s[i - j] == s[i + j + 1])
                     {
-                        if ((2 * j) + 2 > res.Length)
+                        if ((2 * j) + 2 > end - start)
                         {
-                            res = "";
-                            for (int k = i - j; k < i + j + 2; k++)
-                            {
-                                res += s[k];
-                            }
+                            start = i - j;
+                            end = i + j + 2;
                         }
                         j++;
                     }
@@ -60,7 +54,7 @@ namespace LeetCode
                 }
             }
 
-            return res;
+            return s.Substring(start,end-start);
         }
     }
 }
